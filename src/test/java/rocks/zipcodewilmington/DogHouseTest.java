@@ -1,5 +1,6 @@
 package rocks.zipcodewilmington;
 
+import org.junit.Assert;
 import org.junit.Test;
 import rocks.zipcodewilmington.animals.Dog;
 import rocks.zipcodewilmington.animals.animal_creation.AnimalFactory;
@@ -30,5 +31,91 @@ public class DogHouseTest {
 
         // Then
         DogHouse.getNumberOfDogs();
+    }
+    @Test
+    public void addDogTest(){
+        //Given
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        Dog actual = DogHouse.getDogById(1);
+
+        //Then
+
+        Assert.assertEquals(actual,dog1);
+    }
+    @Test
+    public void removeDog(){
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        DogHouse.remove(dog);
+        Dog actual = DogHouse.getDogById(0);
+
+        Assert.assertTrue(actual == null);
+
+    }
+    @Test
+    public void removeIntDog(){
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+       DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        DogHouse.remove(0);
+        Dog actual = DogHouse.getDogById(0);
+
+        Assert.assertTrue(actual == null);
+
+    }
+    @Test
+    public void getDogByIdTest(){
+
+        String name = "milo";
+        Date date = new Date();
+        DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+       Dog actual = DogHouse.getDogById(0);
+
+        Assert.assertTrue(actual == dog);
+
+    }
+    @Test
+    public void getNumberOfDogTest(){
+
+        String name = "milo";
+        Date date = new Date();
+       DogHouse.clear();
+
+        //When
+        Dog dog = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog);
+        Dog dog1 = AnimalFactory.createDog(name,date);
+        DogHouse.add(dog1);
+        Integer actual = DogHouse.getNumberOfDogs();
+
+        Assert.assertTrue(actual == 2);
+
     }
 }
